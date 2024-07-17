@@ -8,90 +8,66 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Pressable,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+      <Text style={styles.sectionTitle}>{title}</Text>
+      <View style={{backgroundColor: '#808080'}}>{children}</View>
     </View>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+type ItemProps = PropsWithChildren<{
+  title: string;
+}>;
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function Item({title}: ItemProps): React.JSX.Element {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
+    <Pressable
+      style={styles.item}
+      onPress={() => console.log(title + ' pressed.')}>
+      <Text>{title}</Text>
+    </Pressable>
+  );
+}
+
+function App(): React.JSX.Element {
+  return (
+    <SafeAreaView>
+      <Section title="Inverted ScrollView Example">
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={{
+            transform: [{scaleY: -1}],
+          }}>
+          <Item title="Item 1" />
+          <Item title="Item 2" />
+          <Item title="Item 3" />
+        </ScrollView>
+      </Section>
+
+      <Section title="Inverted Parent View Example">
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            transform: [{scaleY: -1}],
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <Item title="Item 1" />
+          <Item title="Item 2" />
+          <Item title="Item 3" />
         </View>
-      </ScrollView>
+      </Section>
     </SafeAreaView>
   );
 }
@@ -104,6 +80,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
   sectionDescription: {
     marginTop: 8,
