@@ -68,6 +68,22 @@ function App(): React.JSX.Element {
           <Item title="Item 3" />
         </View>
       </Section>
+
+      <Section title="Double Inversion Example">
+        <View
+          style={{
+            transform: [{rotateY: '180deg'}],
+          }}>
+          <View
+            style={{
+              transform: [{scaleY: -1}],
+            }}>
+            <Item title="Item 1" />
+            <Item title="Item 2" />
+            <Item title="Item 3" />
+          </View>
+        </View>
+      </Section>
     </SafeAreaView>
   );
 }
@@ -86,6 +102,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    width: '50%',
   },
   sectionDescription: {
     marginTop: 8,
