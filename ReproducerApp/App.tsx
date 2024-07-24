@@ -51,7 +51,6 @@ function App(): React.JSX.Element {
           <View
             style={{
               transform: [{translateX: 100}, {rotate: '90deg'}],
-              backgroundColor: 'red',
               width: '200',
             }}>
             <View
