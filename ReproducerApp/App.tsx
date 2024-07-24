@@ -46,34 +46,38 @@ function Item({title}: ItemProps): React.JSX.Element {
 function App(): React.JSX.Element {
   return (
     <SafeAreaView>
-      <Section title="Inverted ScrollView Example">
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={{
-            transform: [{scaleY: -1}],
-          }}>
-          <Item title="Item 1" />
-          <Item title="Item 2" />
-          <Item title="Item 3" />
-        </ScrollView>
-      </Section>
+      <ScrollView>
+        <Section title="Nested Transform Example">
+          <View
+            style={{
+              transform: [{translateX: 100}, {rotate: '90deg'}],
+              backgroundColor: 'red',
+              width: '200',
+            }}>
+            <View
+              style={{
+                transform: [{scaleY: -1}],
+              }}>
+              <Item title="Item 1" />
+              <Item title="Item 2" />
+              <Item title="Item 3" />
+            </View>
+          </View>
+        </Section>
 
-      <Section title="Inverted Parent View Example">
-        <View
-          style={{
-            transform: [{scaleY: -1}],
-          }}>
-          <Item title="Item 1" />
-          <Item title="Item 2" />
-          <Item title="Item 3" />
-        </View>
-      </Section>
+        <Section title="Inverted ScrollView Example">
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={{
+              transform: [{scaleY: -1}],
+            }}>
+            <Item title="Item 1" />
+            <Item title="Item 2" />
+            <Item title="Item 3" />
+          </ScrollView>
+        </Section>
 
-      <Section title="Double Inversion Example">
-        <View
-          style={{
-            transform: [{rotateY: '180deg'}],
-          }}>
+        <Section title="Inverted Parent View Example">
           <View
             style={{
               transform: [{scaleY: -1}],
@@ -82,8 +86,24 @@ function App(): React.JSX.Element {
             <Item title="Item 2" />
             <Item title="Item 3" />
           </View>
-        </View>
-      </Section>
+        </Section>
+
+        <Section title="Double Inversion Example">
+          <View
+            style={{
+              transform: [{rotateY: '180deg'}],
+            }}>
+            <View
+              style={{
+                transform: [{scaleY: -1}],
+              }}>
+              <Item title="Item 1" />
+              <Item title="Item 2" />
+              <Item title="Item 3" />
+            </View>
+          </View>
+        </Section>
+      </ScrollView>
     </SafeAreaView>
   );
 }
